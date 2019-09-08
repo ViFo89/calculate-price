@@ -2,17 +2,19 @@
 // productType, 0 = new product, 1 = old product
 // price, the price of the product
 
-function calculatePrice(userType, productType, price, publishDate) {
-	try {
-		const priceWithUserRebate = handleUser(userType, price);
-		const calculatedPrice = handleProductType(productType, priceWithUserRebate, publishDate)
-		return calculatedPrice;
-	} catch (ex) {
-		console.log(ex)
+function initPriceCalculator(todaysDate) {
+	function calculatePrice(userType, productType, price, publishDate) {
+		try {
+			const priceWithUserRebate = handleUserCalculation(userType, price);
+			const calculatedPrice = handleProductCalculation(productType, priceWithUserRebate, publishDate)
+			return calculatedPrice;
+		} catch (ex) {
+			console.log(ex)
+		}
+		return 0;
 	}
-	return 0;
 
-	function handleProductType(product, price, publishDate) {
+	function handleProductCalculation(product, price, publishDate) {
 		switch (product) {
 			case productTypes.NEW:
 				let newPrice = 25;
@@ -27,7 +29,7 @@ function calculatePrice(userType, productType, price, publishDate) {
 		}
 	}
 
-	function handleUser(user, price) {
+	function handleUserCalculation(user, price) {
 		switch (user) {
 			case userTypes.NORMAL:
 				return price;
@@ -39,6 +41,8 @@ function calculatePrice(userType, productType, price, publishDate) {
 	}
 
 	function isToday(date) {
-		return date.toDateString() === new Date().toDateString()
+		return date.toDateString() === todaysDate().toDateString()
 	}
+
+	return calculatePrice;
 }

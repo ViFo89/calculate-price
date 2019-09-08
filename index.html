@@ -17,6 +17,9 @@
         var price = 100;
         var publishedDate = new Date();
 
+        var todaysDate = () => new Date();
+        var calculatePrice = initPriceCalculator(todaysDate);
+
         try {
             calculatedPrice = calculatePrice(userType, productType, price, publishedDate);
         } catch (ex) {

@@ -1,4 +1,6 @@
 describe('price calculator', () => {
+	const calculatePrice = initPriceCalculator(() => new Date());
+
 	describe('normal customer', () => {
 		const user = userTypes.NORMAL;
 
