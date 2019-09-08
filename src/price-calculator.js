@@ -2,7 +2,7 @@
 // productType, 0 = new product, 1 = old product
 // price, the price of the product
 
-function initPriceCalculator(todaysDate) {
+function initPriceCalculator(getRebateDate) {
 	function calculatePrice(userType, productType, price, publishDate) {
 		try {
 			const priceWithUserRebate = handleUserCalculation(userType, price);
@@ -18,7 +18,7 @@ function initPriceCalculator(todaysDate) {
 		switch (product) {
 			case productTypes.NEW:
 				let newPrice = 25;
-				if (isToday(publishDate)) {
+				if (isRebateDay(publishDate)) {
 					newPrice -= 10;
 				}
 				return price + newPrice;
@@ -40,8 +40,8 @@ function initPriceCalculator(todaysDate) {
 		}
 	}
 
-	function isToday(date) {
-		return date.toDateString() === todaysDate().toDateString()
+	function isRebateDay(date) {
+		return date.toDateString() === getRebateDate().toDateString()
 	}
 
 	return calculatePrice;
